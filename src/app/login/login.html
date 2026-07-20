@@ -1,0 +1,62 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <!-- Header with Back Link and Logo -->
+    <div class="auth-header">
+      <a routerLink="/" class="back-link">← Back to Home</a>
+      <img src="logo.png" alt="AEM Commander" class="auth-logo">
+      <h2>{{ isSignUp ? 'Create SaaS Account' : 'Welcome Back, Commander' }}</h2>
+      <p>{{ isSignUp ? 'Join the tactical AI network for DCS World' : 'Sign in to access your telemetry dashboard and cloud campaigns' }}</p>
+    </div>
+
+    <!-- Mode Selector Tabs -->
+    <div class="auth-tabs">
+      <button [class.active]="!isSignUp" (click)="toggleMode(false)" type="button">Sign In</button>
+      <button [class.active]="isSignUp" (click)="toggleMode(true)" type="button">Create Account</button>
+    </div>
+
+    <!-- Social Authentication Providers -->
+    <div class="social-login">
+      <button class="btn-social" type="button" (click)="onGoogleLogin()">
+        <span>Continue with Google</span>
+      </button>
+      <button class="btn-social" type="button">
+        <span>Continue with Discord</span>
+      </button>
+    </div>
+
+    <div class="divider">
+      <span>OR</span>
+    </div>
+
+    <!-- Standard Email/Password Form -->
+    <form class="auth-form" (submit)="onSubmit($event)">
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input #emailInput type="email" id="email" placeholder="pilot@dcs-world.com" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input #passInput type="password" id="password" placeholder="••••••••" required>
+        </div>
+
+        @if (isSignUp) {
+            <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input #confirmInput type="password" id="confirm-password" placeholder="••••••••" required>
+            </div>
+        }
+
+        <!-- Mensaje de error táctico en rojo -->
+        @if (errorMessage) {
+            <div style="color: #ef4444; font-size: 0.85rem; margin-bottom: 1rem; text-align: center; background: rgba(239, 68, 68, 0.1); padding: 0.5rem; border-radius: 4px;">
+            {{ errorMessage }}
+            </div>
+        }
+
+        <button type="submit" class="btn-primary full-width">
+            {{ isSignUp ? 'Register Account' : 'Launch Session' }}
+        </button>
+    </form>
+  </div>
+</div>
