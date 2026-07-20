@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth';
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
-export class Login {
+export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
@@ -37,12 +37,12 @@ export class Login {
       }
       // Registro de nueva cuenta
       this.authService.registerWithEmail(email, pass)
-        .then(() => this.router.navigate(['/']))
+        .then(() => this.router.navigate(['/dashboard']))
         .catch(err => this.handleAuthError(err));
     } else {
       // Login tradicional
       this.authService.loginWithEmail(email, pass)
-        .then(() => this.router.navigate(['/']))
+        .then(() => this.router.navigate(['/dashboard']))
         .catch(err => this.handleAuthError(err));
     }
   }

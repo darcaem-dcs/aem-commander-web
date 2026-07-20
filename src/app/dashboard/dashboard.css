@@ -1,0 +1,84 @@
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #0d0f14;
+  color: #ffffff;
+  font-family: system-ui, sans-serif;
+}
+
+.sidebar {
+  width: 260px;
+  background-color: #12161f;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+}
+
+.logo-section h2 {
+  font-size: 1.4rem;
+  margin: 0 0 2.5rem 0;
+  color: #ffffff;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-grow: 1;
+}
+
+.nav-item {
+  padding: 0.8rem 1rem;
+  color: #8a8f98;
+  text-decoration: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.nav-item.active, .nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.btn-logout {
+  background: transparent;
+  border: 1px solid #ff4a4a;
+  color: #ff4a4a;
+  padding: 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-logout:hover {
+  background: rgba(255, 74, 74, 0.1);
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 3rem;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.system-status {
+  background-color: rgba(46, 213, 115, 0.1);
+  color: #2ed573;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+.welcome-card {
+  background: #12161f;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 8px;
+}

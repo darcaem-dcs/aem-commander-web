@@ -1,10 +1,16 @@
 import { Routes } from '@angular/router';
-import { Landing } from './landing/landing';
-import { Login } from './login/login';
+import { LandingComponent } from './landing/landing';
+import { LoginComponent } from './login/login';
+import { DashboardComponent } from './dashboard/dashboard';
+import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
-  { path: '', component: Landing },
-  { path: 'login', component: Login },
-  // Redirects any unknown URL back to the landing page
+  { path: '', component: LandingComponent },
+  { path: 'login', component: LoginComponent },
+  { 
+    path: 'dashboard', 
+    component: DashboardComponent, 
+    canActivate: [authGuard] // Only logged-in users can access the dashboard
+  },
   { path: '**', redirectTo: '' }
 ];
