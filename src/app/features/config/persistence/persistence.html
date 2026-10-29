@@ -1,0 +1,35 @@
+<!-- src/app/features/config/persistence/persistence.html -->
+<div class="module-pane active-pane">
+  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 20px;">
+    <h2 style="margin: 0; font-size: 1.5em; color: var(--text-main);">Dynamic Campaign Persistence</h2>
+    <label class="switch">
+      <input type="checkbox"
+             [ngModel]="stateService.config().persistenceEnabled"
+             (ngModelChange)="stateService.updateConfig({ persistenceEnabled: $event })">
+      <span class="slider"></span>
+    </label>
+  </div>
+  
+  <p style="font-size: 0.9em; color: var(--text-muted); margin-bottom: 20px;">
+    Carry over destroyed units, active flights, and strategic weapons (Ballistic Missiles) across different play sessions.
+  </p>
+  
+  <div class="module-content-inner" [class.module-disabled]="!stateService.config().persistenceEnabled">
+      
+      <!-- Panel de Carga (Cloud Firestore placeholder) -->
+      <div style="background: var(--bg-header); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 20px;">
+          <h3 style="margin: 0 0 10px 0; font-size: 1.1em; color: var(--text-main);">Cloud Save Slot</h3>
+          
+          <div style="display: flex; gap: 15px; align-items: center;">
+              <select class="input-field" style="flex: 1;">
+                  <option value="new">-- Create New Campaign --</option>
+                  <option value="save1">Operation Desert Falcon (Saved: Yesterday)</option>
+              </select>
+              
+              <button class="btn-icon" style="color: var(--accent-red); border-color: var(--accent-red);">
+                  <i class="fa-solid fa-trash"></i> Delete
+              </button>
+          </div>
+      </div>
+  </div>
+</div>

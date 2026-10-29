@@ -1,0 +1,65 @@
+<!-- src/app/features/config/config-layout/config-layout.component.html -->
+<div class="dashboard-container">
+  
+  <!-- Barra Superior -->
+  <div class="card top-bar">
+    <div class="logo-area">
+      <h1 style="margin: 0;">Autonomous Engagement Monitor</h1>
+    </div>
+    <div class="actions" style="display: flex; gap: 15px; align-items: center;">
+      <!-- Toggle de tema -->
+      <button class="btn-icon" (click)="themeService.toggleTheme()">
+        <i class="fa-solid" [class.fa-sun]="themeService.currentTheme() === 'dark'" [class.fa-moon]="themeService.currentTheme() === 'light'"></i>
+      </button>
+      
+      <button class="btn-icon" routerLink="/"><i class="fa-solid fa-house"></i> Home</button>
+      
+      <!-- Selector de archivo oculto -->
+      <input type="file" #mizFileInput style="display: none" accept=".miz" (change)="onFileSelected($event)">
+      
+      <!-- Botón de acción principal que dispara el input -->
+      <button class="btn-select" style="background-color: var(--accent-red); font-weight: bold;" (click)="mizFileInput.click()">
+        <i class="fa-solid fa-rocket"></i> SELECT .MIZ & START
+      </button>
+    </div>
+  </div>
+
+  <!-- Layout Dividido (Sidebar + Área de Contenido) -->
+  <div class="config-layout">
+    
+    <!-- SIDEBAR NAVIGATION -->
+    <div class="config-sidebar">
+      <h3>Modules</h3>
+      
+      <a class="nav-item" routerLink="core" routerLinkActive="active">
+        <span><i class="fa-solid fa-microchip"></i> Core Setup</span>
+      </a>
+      
+      <a class="nav-item" routerLink="ai" routerLinkActive="active">
+        <span><i class="fa-solid fa-robot"></i> AI Commander</span>
+      </a>
+      
+      <a class="nav-item" routerLink="persistence" routerLinkActive="active">
+        <span><i class="fa-solid fa-floppy-disk"></i> Persistence</span>
+      </a>
+      
+      <a class="nav-item" routerLink="csar" routerLinkActive="active">
+        <span><i class="fa-solid fa-parachute-box"></i> CSAR</span>
+      </a>
+      
+      <a class="nav-item" routerLink="civ" routerLinkActive="active">
+        <span><i class="fa-solid fa-plane"></i> Civ Traffic</span>
+      </a>
+      
+      <a class="nav-item" routerLink="qra" routerLinkActive="active">
+        <span><i class="fa-solid fa-jet-fighter"></i> QRA</span>
+      </a>
+    </div>
+
+    <!-- CONTENT AREA (Aquí se cargarán los sub-componentes) -->
+    <div class="config-content-area card">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</div>

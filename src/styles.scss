@@ -1,0 +1,124 @@
+/* src/styles.scss */
+
+// 1. Variables Globales (Sistema de Temas)
+:root {
+  // Dark Theme (Por defecto)
+  &[data-theme="dark"] {
+    --bg-body: #121212;
+    --bg-header: #1e1e1e;
+    --bg-card: #252526;
+    --bg-input: #2d2d2d;
+    --bg-banner: #1e2a38;
+    
+    --text-main: #e0e0e0;
+    --text-muted: #a0a0a0;
+    
+    --accent-blue: #0d6efd;
+    --accent-red: #dc3545;
+    --border-color: #333333;
+  }
+
+  // Light Theme
+  &[data-theme="light"] {
+    --bg-body: #f8f9fa;
+    --bg-header: #ffffff;
+    --bg-card: #ffffff;
+    --bg-input: #e9ecef;
+    --bg-banner: #e2eafc;
+    
+    --text-main: #212529;
+    --text-muted: #6c757d;
+    
+    --accent-blue: #0b5ed7;
+    --accent-red: #bb2d3b;
+    --border-color: #dee2e6;
+  }
+}
+
+// 2. Reseteos y Tipografía Global
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+// 3. Clases Utilitarias Globales (Extraídas de tu código)
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.input-field {
+  background-color: var(--bg-input);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 8px 12px;
+  width: 100%;
+  
+  &:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+  }
+}
+
+// Botones
+button {
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.btn-icon {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  
+  &:hover {
+    background: var(--bg-input);
+  }
+}
+
+.btn-select {
+  background-color: var(--accent-blue);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  
+  &:hover {
+    filter: brightness(1.1);
+  }
+}/* You can add global styles to this file, and also import other style files */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}

@@ -1,0 +1,117 @@
+<!-- src/app/features/landing/landing.html -->
+<div class="landing-container">
+  
+  <header class="landing-header card">
+    <div class="logo-area">
+      <h1>Autonomous Engagement Monitor</h1>
+      <span class="version-badge">v0.5.2</span>
+    </div>
+    
+    <div class="auth-actions" style="display: flex; gap: 15px; align-items: center;">
+      <!-- Selector Tema -->
+      <button class="btn-icon" (click)="themeService.toggleTheme()" title="Toggle Dark/Light Mode">
+        <i class="fa-solid" [class.fa-sun]="themeService.currentTheme() === 'dark'" [class.fa-moon]="themeService.currentTheme() === 'light'"></i>
+      </button>
+      
+      <!-- Si el usuario NO ha iniciado sesión -->
+      <ng-container *ngIf="!authService.currentUser()">
+        <button class="btn-icon" (click)="openModal(false)">
+          <i class="fa-solid fa-right-to-bracket"></i> Sign In
+        </button>
+        <button class="btn-select" (click)="openModal(true)">
+          Register
+        </button>
+      </ng-container>
+
+      <!-- Si el usuario SÍ ha iniciado sesión -->
+      <ng-container *ngIf="authService.currentUser() as user">
+        <span style="font-size: 0.9em; font-weight: bold; color: var(--text-main);">
+          <i class="fa-solid fa-user-check" style="color: var(--accent-blue); margin-right: 6px;"></i>{{ user.email }}
+        </span>
+        
+        <button class="btn-select" routerLink="/config" style="font-weight: bold;">
+          Launch Commander <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        
+        <button class="btn-icon" (click)="authService.logout()" title="Sign out" style="color: var(--accent-red); border-color: var(--border-color);">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+      </ng-container>
+    </div>
+  </header>
+
+  <main class="hero-section">
+    <div class="hero-content text-center">
+      <h2 class="hero-title">AI-Driven Theater Commander for DCS World</h2>
+      <p class="hero-subtitle">
+        A modular companion app providing an <strong>AI-driven Theater Commander</strong> (powered by Gemini), <strong>real-time battlefield tracking</strong>, and <strong>dynamic campaign persistence</strong> to carry over losses, unit positions, and mission time across sessions.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card card">
+        <i class="fa-solid fa-robot feature-icon"></i>
+        <h3>AI Commander</h3>
+        <p>Strategic decision-making powered by Gemini AI, analyzing intelligence and dispatching assets automatically.</p>
+      </div>
+
+      <div class="feature-card card">
+        <i class="fa-solid fa-map-location-dot feature-icon"></i>
+        <h3>Real-Time Telemetry</h3>
+        <p>Live battlefield tracking over WebSockets, displaying friendly patrols and detected enemy threats on a tactical map.</p>
+      </div>
+
+      <div class="feature-card card">
+        <i class="fa-solid fa-floppy-disk feature-icon"></i>
+        <h3>Campaign Persistence</h3>
+        <p>Save and carry over unit locations, combat deaths, and DCS mission time across multiple play sessions.</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Modal Flotante de Autenticación -->
+<div class="modal-overlay" *ngIf="showAuthModal" (click)="closeModal()">
+  <div class="modal-content card" (click)="$event.stopPropagation()" style="width: 380px; max-width: 90%;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <h3 style="margin: 0; color: var(--text-main);">
+        {{ isRegisterMode ? 'Create an Account' : 'Sign In to AEM' }}
+      </h3>
+      <button class="btn-icon" (click)="closeModal()" style="border: none; padding: 4px 8px;">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+      <div>
+        <label style="font-size: 0.85em; font-weight: bold; color: var(--text-main); display: block; margin-bottom: 5px;">Email:</label>
+        <input type="email" [(ngModel)]="email" class="input-field" placeholder="pilot@example.com" (keydown.enter)="submitAuth()">
+      </div>
+
+      <div>
+        <label style="font-size: 0.85em; font-weight: bold; color: var(--text-main); display: block; margin-bottom: 5px;">Password:</label>
+        <input type="password" [(ngModel)]="password" class="input-field" placeholder="••••••••" (keydown.enter)="submitAuth()">
+      </div>
+
+      <div *ngIf="errorMessage" style="color: var(--accent-red); font-size: 0.85em; padding: 8px; background: rgba(220, 53, 69, 0.1); border: 1px solid var(--accent-red); border-radius: 4px;">
+        <i class="fa-solid fa-circle-exclamation"></i> {{ errorMessage }}
+      </div>
+
+      <button class="btn-select" (click)="submitAuth()" [disabled]="loading" style="margin-top: 10px; width: 100%; justify-content: center;">
+        <i *ngIf="loading" class="fa-solid fa-spinner fa-spin" style="margin-right: 6px;"></i>
+        {{ isRegisterMode ? 'Register' : 'Sign In' }}
+      </button>
+
+      <div style="text-align: center; font-size: 0.85em; color: var(--text-muted); margin-top: 5px;">
+        <span *ngIf="!isRegisterMode">
+          Don't have an account? 
+          <a href="javascript:void(0)" (click)="isRegisterMode = true; errorMessage = ''" style="color: var(--accent-blue); text-decoration: underline;">Register</a>
+        </span>
+        <span *ngIf="isRegisterMode">
+          Already have an account? 
+          <a href="javascript:void(0)" (click)="isRegisterMode = false; errorMessage = ''" style="color: var(--accent-blue); text-decoration: underline;">Sign In</a>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

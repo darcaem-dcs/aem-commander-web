@@ -1,0 +1,30 @@
+<!-- src/app/features/config/csar/csar.html -->
+<div class="module-pane active-pane">
+  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 20px;">
+    <h2 style="margin: 0; font-size: 1.5em; color: var(--text-main);">Combat Search and Rescue (CSAR)</h2>
+    <!-- Toggle general del módulo -->
+    <label class="switch">
+      <input type="checkbox"
+             [ngModel]="stateService.config().csarEnabled"
+             (ngModelChange)="stateService.updateConfig({ csarEnabled: $event })">
+      <span class="slider"></span>
+    </label>
+  </div>
+  
+  <p style="font-size: 0.9em; color: var(--text-muted); margin-bottom: 20px;">
+    Automatically deploy downed pilots when an aircraft is destroyed, and enable human-flown rescue missions.
+  </p>
+  
+  <div class="module-content-inner" [class.module-disabled]="!stateService.config().csarEnabled">
+      <!-- Fila de Audios -->
+      <div style="margin-bottom: 25px;">
+          <h3 style="margin: 0 0 10px 0; font-size: 1.1em; color: var(--text-main); border-bottom: 2px solid var(--border-color); padding-bottom: 5px;">Distress Beacon (Audio)</h3>
+          <p style="font-size: 0.85em; color: var(--text-muted); margin-bottom: 10px;">Select the audio file that will loop when a pilot ejects.</p>
+          
+          <div style="display: flex; gap: 10px;">
+              <input type="text" class="input-field" placeholder="morse-sos.ogg" readonly style="opacity: 0.7; max-width: 400px;">
+              <button class="btn-icon" style="margin: 0; padding: 6px 12px;">Browse...</button>
+          </div>
+      </div>
+  </div>
+</div>

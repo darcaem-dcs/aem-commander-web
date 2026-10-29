@@ -1,0 +1,35 @@
+/* src/app/features/config/ai-commander/ai-commander.scss */
+
+// Transiciones y estado desactivado
+.module-content-inner {
+  transition: opacity 0.3s;
+}
+
+.module-disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+// Estilo de los rangos (deslizadores) de agresividad
+input[type=range] {
+  -webkit-appearance: none;
+  background: transparent;
+  
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #ffffff;
+    cursor: pointer;
+    margin-top: -6px; // Para centrarlo en la pista
+  }
+
+  &::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    cursor: pointer;
+    background: var(--border-color);
+    border-radius: 2px;
+  }
+}

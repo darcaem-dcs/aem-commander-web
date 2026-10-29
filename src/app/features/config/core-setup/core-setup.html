@@ -1,0 +1,52 @@
+<div class="module-pane active-pane">
+  <div style="border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 20px;">
+    <h2 style="margin: 0; font-size: 1.5em; color: var(--text-main);">
+      Core Injection Setup
+    </h2>
+  </div>
+  
+  <p style="font-size: 0.9em; color: var(--text-muted); margin-bottom: 20px;">
+    Essential settings required for AEM Commander to communicate with DCS World.
+  </p>
+  
+  <div class="config-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 20px;">
+      
+      <!-- IP Selector enlazado al State -->
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+          <label style="font-weight: bold; color: var(--text-main);">Host IP (Where is this app running?):</label>
+          
+          <select class="input-field" 
+                  [ngModel]="stateService.config().hostIp" 
+                  (change)="onHostIpChange($event)">
+              
+              <option value="127.0.0.1">Localhost (127.0.0.1) - Running on same PC as DCS</option>
+              <option value="cloud">Cloud Relay - Connects to Google Cloud</option>
+          </select>
+          
+          <p style="font-size: 0.8em; color: var(--text-muted); margin-top: 5px;">
+             Select Cloud Relay to route telemetry through your future Python agent.
+          </p>
+      </div>
+
+      <!-- Dependencias enlazadas al State -->
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+          <label style="font-weight: bold; color: var(--text-main);">Mission Dependencies:</label>
+          
+          <label style="cursor: pointer; display: flex; align-items: center; gap: 8px; color: var(--text-main);">
+            <input type="checkbox" 
+                   style="accent-color: var(--accent-blue); width: 16px; height: 16px;"
+                   [ngModel]="stateService.config().hasMoose"
+                   (change)="onMooseChange($event)"> 
+            Mission already includes MOOSE
+          </label>
+          
+          <label style="cursor: pointer; display: flex; align-items: center; gap: 8px; color: var(--text-main);">
+            <input type="checkbox" 
+                   style="accent-color: var(--accent-blue); width: 16px; height: 16px;"
+                   [ngModel]="stateService.config().hasMist"
+                   (change)="onMistChange($event)"> 
+            Mission already includes MIST
+          </label>
+      </div>
+  </div>
+</div>
